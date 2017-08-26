@@ -1,4 +1,4 @@
-FROM python:3.6.2
+FROM python:latest
 
 MAINTAINER Brad Philips "brad.t.philips@gmail.com"
 
@@ -9,8 +9,5 @@ RUN apt-get update
 ENV PANDOC_VERSION "1.19.2.1"
 
 # install pandoc
-RUN curl -sSL https://get.haskellstack.org/ | sh
-ENV PATH /root/.local/bin:$PATH
-RUN stack update
-RUN stack setup --install-ghc
-RUN stack install pandoc-${PANDOC_VERSION}
+RUN wget https://github.com/jgm/pandoc/releases/download/1.19.2.1/pandoc-${PANDOC_VERSION}-1-amd64.deb
+RUN dpkg -i pandoc-${PANDOC_VERSION}-1-amd64.deb
